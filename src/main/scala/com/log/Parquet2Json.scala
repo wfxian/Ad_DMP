@@ -2,8 +2,11 @@ package com.log
 
 import java.sql.{Connection, DriverManager}
 
+import com.util.FileName
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.hadoop.mapred.lib.MultipleTextOutputFormat
+
 
 /**
   * 将统计的结果输出成 json 格式
@@ -17,10 +20,11 @@ object Parquet2Json {
     import org.apache.spark.sql.functions._
 
     val frame: DataFrame = df.groupBy(df.col("provincename") as "provincename" ,df.col("cityname") as "cityname").agg(count("cityname")as "ct").select("ct","provincename", "cityname")
-    frame.show()
+
     //写入本地json
 //    frame.write.json("E:\\BigData\\teacher\\课件\\第四阶段_项目\\用户画像\\Spark用户画像分析\\write\\1\\2.json")
 
+    /*
     //写入Mysql
     //定义连接参数
     val driver = "com.mysql.jdbc.Driver"
@@ -47,6 +51,21 @@ object Parquet2Json {
       sql.close()
       connection.close()
     })
+    */
+
+    //写入HDFS
+//    frame.write.partitionBy("provicename","cityname").json("hdfs://hadoop01:9000/ad")
+
+      //改文件名
+//    frame.rdd.map((_,"")).saveAsHadoopFile("E:\\BigData\\teacher\\课件\\第四阶段_项目\\用户画像\\Spark用户画像分析\\write\\1\\3",
+//      classOf[String],
+//      classOf[String],
+//      classOf[FileName])
+
+
+
+
+
 
 
 
