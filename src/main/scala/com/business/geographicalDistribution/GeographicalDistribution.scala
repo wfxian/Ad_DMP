@@ -1,4 +1,4 @@
-package com.business.GeographicalDistribution
+package com.business.geographicalDistribution
 
 import com.util.RptUtils
 import org.apache.spark.rdd.RDD

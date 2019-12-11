@@ -1,4 +1,4 @@
-package com.business.MediaAnalysis
+package com.business.mediaAnalysis
 
 
 import com.util.{JedisClusters, RptUtils}
